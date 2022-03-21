@@ -3,10 +3,44 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './pages/Login'
+import Homepage from './pages/homePage'
+import Shoppingpage from './pages/shoppingPage'
+import item from './components/Item'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="Login" element={<Login />} />
+
+          <Route path="Homepage" element={<Homepage />} />
+
+          <Route path="Shoppingpage" element={<Shoppingpage />}>
+            <Route path=":itemId" element={<item />} />
+            <Route
+              index
+              element={
+                <main style={{ padding: "1rem" }}>
+                  <p>Select an item</p>
+                </main>
+              }
+            />
+          </Route>
+
+          <Route path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
