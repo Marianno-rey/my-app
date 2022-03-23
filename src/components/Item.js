@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-
+// reads from data.js
 const item = () => {
     let params = useParams();
     let item = getItem(parseInt(params.itemId, 10));

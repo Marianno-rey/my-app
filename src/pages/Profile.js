@@ -1,6 +1,11 @@
+import { Container } from 'react-bootstrap'
+
 const Profile = () => {
+
   return (
-    <div>Profile</div>
+    <Container>
+      
+    </Container>
   )
 }
 
