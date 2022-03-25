@@ -8,7 +8,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login'
 import Homepage from './pages/homePage'
 import Shoppingpage from './pages/shoppingPage'
-import item from './components/Item'
+import Profile from './pages/Profile'
+import Admin from './pages/Profile'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -30,6 +31,10 @@ ReactDOM.render(
               }
             />
           </Route>
+          
+          <Route path="Profile" element={<Profile />} />
+
+          <Route path="Admin" element={<Admin />} />
 
           <Route path="*"
             element={

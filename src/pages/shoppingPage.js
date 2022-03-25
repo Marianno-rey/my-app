@@ -3,6 +3,7 @@
 // The reason is to get an understanding of data transfer in React-router
 import { Link, Outlet } from 'react-router-dom';
 import { getItems } from '../data';
+import "../styles/styles.css";
 
 const Shoppingpage = () => {
     let items = getItems();
