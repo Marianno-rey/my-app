@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/styles.css";
+import { Link } from 'react-router-dom';
 
 const Login = (props) => {
 
@@ -42,7 +43,10 @@ const Login = (props) => {
                     Login
                 </Button>
             </Form>
-            
+
+            <h4 style={{marginTop:'4rem'}}>Don't have an account yet? Create one below</h4>
+            <hr />
+            <Link to="/CreateAccount" className="btn btn-primary">Create Account</Link>
         </div>
     );
 

@@ -1,20 +1,22 @@
 import { Container } from 'react-bootstrap'
 import "../styles/styles.css";
 import React from 'react';
+import { useState } from 'react'
+import { Link } from 'react-router-dom';
 
-const Profile = () => {
+const Profile = (props) => {
+  const [isAdmin, setIsAdmin] = useState(true);
 
   return (
-    <Container>
       <Container className='sidenav'>
 
-        <a href=''>Personal Information</a>
-        <a href=''>Orders</a>
-        <a href=''>Security</a>
-        <a href=''>Admin</a>
-
+        <Link to="/PersonalInformation">Personal Information</Link> |{" "}
+        <Link to="/Orders">Orders</Link>|{" "}
+        <Link to="/Security">Security</Link>|{" "}
+        {  isAdmin === true &&
+          <Link to="/Admin">Admin</Link>
+        }
       </Container>
-    </Container>
 
   );
 }

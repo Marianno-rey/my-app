@@ -9,7 +9,11 @@ import Login from './pages/Login'
 import Homepage from './pages/homePage'
 import Shoppingpage from './pages/shoppingPage'
 import Profile from './pages/Profile'
-import Admin from './pages/Profile'
+import Admin from './pages/admin'
+import Orders from './pages/orders'
+import PersonalInformation from './pages/personalInformation'
+import Security from './pages/personalInformation'
+import CreateAccount from './pages/createAccount'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -31,10 +35,13 @@ ReactDOM.render(
               }
             />
           </Route>
-          
-          <Route path="Profile" element={<Profile />} />
 
+          <Route path="Profile" element={<Profile />} />
+          <Route path="PersonalInformation" element={<PersonalInformation />} />
+          <Route path="Orders" element={<Orders />} />
+          <Route path="Security" element={<Security />} />
           <Route path="Admin" element={<Admin />} />
+          <Route path="CreateAccount" element={<CreateAccount />} />
 
           <Route path="*"
             element={
