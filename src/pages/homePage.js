@@ -1,7 +1,6 @@
-import "../styles/styles.css";
 const Homepage = () => {
   return (
-    <div>homepage</div>
+    <div>homepcsaage</div>
   )
 };
 

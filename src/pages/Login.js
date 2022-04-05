@@ -1,56 +1,126 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import "../styles/styles.css";
-import { Link } from 'react-router-dom';
+import React, { Component, Fragment } from "react";
+import Input from "./form-components/Input";
+import Alert from "./ui-components/Alert";
 
-const Login = (props) => {
+export default class Login extends Component {
+  constructor(props) {
+    super(props);
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    this.state = {
+      email: "",
+      password: "",
+      error: null,
+      errors: [],
+      alert: {
+        type: "d-none",
+        message: "",
+      },
+    };
 
-    function validateForm() {
-        return email.length > 0 && password.length > 0;
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange = (evt) => {
+    let value = evt.target.value;
+    let name = evt.target.name;
+    this.setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    let errors = [];
+
+    if (this.state.email === "") {
+        errors.push("email");
     }
 
-    function handleSubmit(event) {
-        event.preventDefault();
+    if (this.state.password === "") {
+        errors.push("password");
     }
 
-    return (
-        <div className="Login">
-            <Form onSubmit={handleSubmit}>
-                <Form.Group size="lg" controlId="email">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Form.Group>
+    this.setState({errors: errors});
 
-                <Form.Group size="lg" controlId="password">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Group>
+    if (errors.length > 0) {
+        return false;
+    }
 
-                <Button block size="lg" type="submit" disabled={!validateForm()}>
-                    Login
-                </Button>
-            </Form>
+    const data = new FormData(evt.target);
+    const payload = Object.fromEntries(data.entries());
 
-            <h4 style={{marginTop:'4rem'}}>Don't have an account yet? Create one below</h4>
-            <hr />
-            <Link to="/CreateAccount" className="btn btn-primary">Create Account</Link>
-        </div>
-    );
+    const requestOptions = {
+        method: "POST",
+        body: JSON.stringify(payload),
+    }
 
+    fetch("http://localhost:4000/v1/signin", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.error) {
+                this.setState({
+                    alert: {
+                        type: "alert-danger",
+                        message: data.error.message,
+                    }
+                })
+            } else {
+                console.log(data);
+                this.handleJWTChange(Object.values(data)[0]);
+                window.localStorage.setItem("jwt", JSON.stringify(Object.values(data)[0]));
+                this.props.history.push({
+                    pathname: "/admin",
+                })
+            }
+        })
+
+  };
+ 
+  handleJWTChange(jwt) {
+    this.props.handleJWTChange(jwt);
 }
+  hasError(key) {
+    return this.state.errors.indexOf(key) !== -1;
+  }
 
+  render() {
+    return (
+      <Fragment>
+        <h2>Login</h2>
+        <hr />
+        <Alert
+          alertType={this.state.alert.type}
+          alertMessage={this.state.alert.message}
+        />
 
-export default Login;
+        <form className="pt-3" onSubmit={this.handleSubmit}>
+          <Input
+            title={"Email"}
+            type={"email"}
+            name={"email"}
+            handleChange={this.handleChange}
+            className={this.hasError("email") ? "is-invalid" : ""}
+            errorDiv={this.hasError("email") ? "text-danger" : "d-none"}
+            errorMsg={"Please enter a valid email address"}
+          />
+
+          <Input
+            title={"Password"}
+            type={"password"}
+            name={"password"}
+            handleChange={this.handleChange}
+            className={this.hasError("password") ? "is-invalid" : ""}
+            errorDiv={this.hasError("password") ? "text-danger" : "d-none"}
+            errorMsg={"Please enter a password"}
+          />
+
+          <hr />
+          <button className="btn btn-primary">Login</button>
+        </form>
+      </Fragment>
+    );
+  }
+}
