@@ -1,22 +1,129 @@
-import { useState } from 'react'
-import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
-import NavBar from './components/NavBar'
-import { Outlet, Link } from 'react-router-dom'
-import "./styles/styles.css";
+import React, { Component, Fragment } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Admin from "./pages/Admin";
+import Home from "./components/Home";
+import Login from "./pages/Login";
 
-// Initial page should be create account with option to continue as guest or to login. Could also force people to create an account to simplify things
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      jwt: "",
+    };
+    this.handleJWTChange(this.handleJWTChange.bind(this));
+  }
 
-function App() {
-  // Nav will likely be changed to a single NavBar component
-  return (
-    <Container className='main'>
-      <h1 style={{ textAlign: 'center' }}>RoadRunners Closet</h1>
-      <NavBar />
-      <hr />
-      <Outlet />
-    </Container>
+  componentDidMount() {
+    let t = window.localStorage.getItem("jwt");
+    if (t) {
+      if (this.state.jwt === "") {
+        this.setState({jwt: JSON.parse(t)});
+      }
+    }
+  }
 
+  handleJWTChange = (jwt) => {
+    this.setState({ jwt: jwt });
+  };
+
+  logout = () => {
+    this.setState({ jwt: "" });
+    window.localStorage.removeItem("jwt");
+  };
+
+  render() {
+    let loginLink;
+    if (this.state.jwt === "") {
+      loginLink = <Link to="/login">Login</Link>;
+    } else {
+      loginLink = (
+        <Link to="/logout" onClick={this.logout}>
+          Logout
+        </Link>
+      );
+    }
+
+    return (
+      <Router>
+      <div className="container">
+        <div className="row">
+          <div className="col mt-3">
+            <h1 className="mt-3">Go Watch a Movie!</h1>
+          </div>
+          <div className="col mt-3 text-end">{loginLink}</div>
+          <hr className="mb-3"></hr>
+        </div>
+
+        <div className="row">
+          <div className="col-md-2">
+            <nav>
+              <ul className="list-group">
+                <li className="list-group-item">
+                  <Link to="/">Home</Link>
+                </li>
+                <li className="list-group-item">
+                  <Link to="/shoppingPage">Shopping Page</Link>
+                </li>
+                <li className="list-group-item">
+                  <Link to="/shoppingCart">Shopping Cart</Link>
+                </li>
+                {this.state.jwt !== "" && (
+                  <Fragment>
+                    <li className="list-group-item">
+                      <Link to="/admin/add">Add Item</Link>
+                    </li>
+                    <li className="list-group-item">
+                      <Link to="/admin">Delete Item</Link>
+                    </li>
+                  </Fragment>
+                )}
+              </ul>
+              <pre>{JSON.stringify(this.state, null, 3)}</pre>
+            </nav>
+          </div>
+
+          <div className="col-md-10">
+            <Switch>
+              
+
+              <Route path="/movies">
+                
+              </Route>
+
+              
+
+              <Route
+                exact
+                path="/login"
+                component={(props) => (
+                  <Login {...props} handleJWTChange={this.handleJWTChange} />
+                )}
+              />
+
+              <Route exact path="/genres">
+                
+              </Route>
+
+              
+
+              <Route
+                path="/admin"
+                component={(props) => (
+                  <Admin {...props} jwt={this.state.jwt} />
+                )}
+              />
+
+              {/* <Route path="/admin">
+                <Admin />
+              </Route> */}
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </div>
+        </div>
+      </div>
+    </Router>
   );
 }
-
-export default App;
+}

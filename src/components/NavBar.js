@@ -1,30 +1,33 @@
-import '../styles/styles.css'
-import {
-    Link, Outlet, BrowserRouter, Switch,
-    Route, useParams, useRouteMatch
-} from 'react-router-dom'
-import { Nav } from 'react-bootstrap'
+import 'react-bootstrap';
+import 'bootstrap';
 
 
-
-const NavBar = () => {
+const NavBar = (props) => {
     return (
 
-        <Nav className='navBar'>
-            <Link to="/Login">Login</Link> |{" "}
-            <Link to="/HomePage">Homepage </Link>|{" "}
-            <Link to="/ShoppingCart">Shopping Cart</Link>|{" "}
-            <Link to="/Shoppingpage">Shopping page</Link>|{" "}
-            <Link to="/Profile">Profile</Link>
-        </Nav>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <a className="navbar-brand" href="#">RoadRunners Closet</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item active">
+                        <a className="nav-link" href="#">Homepage</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+                <form className="my-2 my-lg-0">
+                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
 
     )
 }
 
 export default NavBar;
-
-
-{/* <Link to='/PersonalInformation'>Personal Information</Link>
-<Link to='/Orders'>Orders</Link>
-<Link to='/Security'></Link>
-<Link to='/Admin'></Link> */}
