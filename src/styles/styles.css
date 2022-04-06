@@ -1,4 +1,4 @@
-.Login{
+.Login {
     margin-left: 20%;
     margin-right: 20%;
     border-style: hidden;
@@ -7,29 +7,39 @@
 
 .navBar {
     display: flex;
-    justify-content: space-between; 
-    margin-left: 5rem;
-    margin-right: 5rem; 
+    justify-content: space-between;
+    margin-left: 2rem;
+    margin-right: 2rem;
     margin-top: 5rem;
     margin-bottom: 5rem;
-    
+    overflow: hidden;
+    background-color: #333;
 }
 
 .main {
     width: 90%;
-    min-height: 100vh; 
+    min-height: 100vh;
 }
 
-.sidenav{ 
-    width: 25%;  
-    z-index: 1; 
-    top: 0; 
-    left: 0; 
-    background-color:#6a90e0; 
-    transition: .5s ease; 
-    overflow-x: hidden; 
-    padding-top: 20px; 
-    display: flex; 
-    flex-direction: column; 
+.sidenav {
+    width: 25%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #6a90e0;
+    transition: .5s ease;
+    overflow-x: hidden;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
+
+.navBar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+

@@ -5,13 +5,13 @@ import { Row, Col } from 'react-bootstrap'
 import Item  from '../components/Item';
 
 function Homepage() {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
 
       async function fetchProducts() {
           
-          const { data } = await axios.get('http://34.123.91.205/search/')
+          const { data } = await axios.get('http://34.123.91.205/get-items/')
           setProducts(data)
       }
       

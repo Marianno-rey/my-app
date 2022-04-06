@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom';
 
 const Profile = (props) => {
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   return (
       <Container className='sidenav'>

@@ -14,6 +14,7 @@ import Orders from './pages/orders'
 import PersonalInformation from './pages/personalInformation'
 import Security from './pages/personalInformation'
 import CreateAccount from './pages/createAccount'
+import ItemPage from './pages/ItemPage'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -42,6 +43,8 @@ ReactDOM.render(
           <Route path="Security" element={<Security />} />
           <Route path="Admin" element={<Admin />} />
           <Route path="CreateAccount" element={<CreateAccount />} />
+          <Route path="/HomePage/ItemPage/:id?" component={ItemPage} />
+          <Route path="ItemPage" component={ItemPage} />
 
           <Route path="*"
             element={

@@ -44,7 +44,7 @@ const Login = (props) => {
                 </Button>
             </Form>
 
-            <h4 style={{marginTop:'4rem'}}>Don't have an account yet? Create one below</h4>
+            <h4 style={{ marginTop: '4rem' }}>Don't have an account yet? Create one below</h4>
             <hr />
             <Link to="/CreateAccount" className="btn btn-primary">Create Account</Link>
         </div>
