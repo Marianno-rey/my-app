@@ -1,17 +1,27 @@
-import { useParams } from 'react-router-dom'
-// reads from data.js
-const item = () => {
-    let params = useParams();
-    let item = getItem(parseInt(params.itemId, 10));
-    return( 
-        <main>
-            <h2>Total Due : {item.amount}</h2>
-            <p>
-                {item.name}: {item.number}
-            </p>
-            <p>Due Date: {item.due}</p>
-        </main>
-    )
-};
+import React from 'react'
+import { Card } from 'react-bootstrap'
 
-export default item;
+function Item({ item }) {
+    return (
+        <Card className="my-3 p-3 rounded">
+            <a href={'${product.id}'}>
+            </a>
+            
+            <Card.Body>
+                <a href={'${product.id}'}>
+                    <Card.Title as="div">
+                        <strong>{item.item_name}</strong>
+                    </Card.Title>
+                </a>
+                
+                <Card.Text as="h3">
+                    ${item.price}
+                </Card.Text>
+            </Card.Body>
+            
+            
+        </Card>
+    )
+}
+
+export default Item;

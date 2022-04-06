@@ -50,7 +50,7 @@ const CreateAccount = () => {
           </Form.Group>
 
           <Button block size="lg" type="submit" disabled={!validateForm()}>
-              Login
+              Create Account
           </Button>
       </Form>
     </Container>
