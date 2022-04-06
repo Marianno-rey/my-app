@@ -43,8 +43,12 @@ ReactDOM.render(
           <Route path="Security" element={<Security />} />
           <Route path="Admin" element={<Admin />} />
           <Route path="CreateAccount" element={<CreateAccount />} />
-          <Route path="/HomePage/ItemPage/:id?" component={ItemPage} />
-          <Route path="ItemPage" component={ItemPage} />
+
+
+          <Route path="HomePage">
+            <Route path="ItemPage/:id?" element={<ItemPage />}></Route>
+          </Route>
+          <Route path="ItemPage" element={<ItemPage />}></Route>
 
           <Route path="*"
             element={

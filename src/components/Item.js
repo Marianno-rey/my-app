@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 function Item({ item }) {
     return (
         <Card className="my-3 p-3 rounded">
-            <a href={`/HomePage/ItemPage/${item.id}`} >
-                <Card.Img src={item.image}></Card.Img>
-            </a>
+            <Link to={`/HomePage/ItemPage/${item.id}`}  state={item}>
+                <Card.Img src={item.image} ></Card.Img>
+            </Link>
             <Card.Body>
 
                 <Link to="/ItemPage">
@@ -27,3 +27,6 @@ function Item({ item }) {
 }
 
 export default Item;
+
+// This page is a child of homepage. It is being rendered from the homepage
+// This page CANNOT have the itemPage as a child. I mean it can but we should not do it like that

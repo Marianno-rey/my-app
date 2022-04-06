@@ -35,3 +35,10 @@ function Homepage() {
 
 
 export default Homepage;
+
+// This page should firstly render all items. 
+// This page should then conditionally render the item page directly from here.
+// Only one thing needs to be passed to the ItemPage and that is "item" ex <ItemPage item={item} />
+// Almost certainly requires refactoring.
+// Current implementation assumes ItemPage is a child of Item
+
